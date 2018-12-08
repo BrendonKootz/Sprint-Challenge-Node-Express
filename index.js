@@ -1,18 +1,21 @@
 const EXP = require('express');
-server = EXP();
+const server = EXP();
+const projectDB = require('./data/helpers/projectModel');
+const actionDB = require('./data/helpers/actionModel');
+const projectRouter = require('./routers/projectRouter');
+const actionRouter = require('./routers/actionRouter');
+
+
 console.log("Starting up that server...");
 const PORT = 4000;
-
-// Send some data
 server.get('/',(req,res) => {
-	res.send("Server is live!!!");
+	res
+		.status(200)
+		.send("Server is live!!!")
 });
 
-// Get Id's
-server.get('/api:id',(req,res) => {
-	const id = req.params.id;
-	
-});
+
+server.use('/routers',actionRouter);
 
 // Listen
 server.listen(PORT, () => {
